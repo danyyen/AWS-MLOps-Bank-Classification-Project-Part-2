@@ -1,0 +1,40 @@
+1. Initialize Terraform
+terraform init
+
+
+2. Validate Configuration
+terraform validate
+
+
+Checks the syntax and verifies that your Terraform files are valid.
+
+
+3. Create Execution Plan
+terraform plan -var-file="secrets.tfvars"
+
+Previews what actions Terraform will take before making any changes.
+
+
+4. Apply Configuration
+terraform apply -var-file="secrets.tfvars"
+
+Creates or updates the infrastructure as defined in your Terraform files.
+
+5. Apply Without Confirmation
+terraform apply -var-file="secrets.tfvars" --auto-approve
+
+
+Automatically applies the changes without asking for approval.
+
+6. Destroy Infrastructure
+terraform destroy -var-file="secrets.tfvars" --auto-approve
+
+
+Removes all resources created by Terraform automatically.
+
+7. Set EC2 Key File Permissions
+icacls "terraform-eks-key.pem" /inheritance:r
+icacls "terraform-eks-key.pem" /grant:r "%USERNAME%:R"
+
+
+Removes inherited permissions and grants read-only access to your EC2 key file for security.

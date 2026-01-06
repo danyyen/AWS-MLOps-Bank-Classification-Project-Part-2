@@ -1,0 +1,17 @@
+# 1. Initialize a local Git repository
+git init
+
+# 2. Add GitHub remote repository
+git remote add origin <repository-url>
+
+# 3. switch to a new branch called 'master'
+git checkout -b master
+
+# 4. Stage all files for commit
+git add .
+
+# 5. Commit the staged files with a message
+git commit -m "initial commit"
+
+# 6. Push the branch 'master' to GitHub and set upstream
+git push -u origin master

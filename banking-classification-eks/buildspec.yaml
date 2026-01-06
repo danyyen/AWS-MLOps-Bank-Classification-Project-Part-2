@@ -1,0 +1,39 @@
+version: 0.2
+
+env:
+  shell: bash
+  
+phases:
+  install:
+    commands:
+      - echo "Installing kubectl..."
+      - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.23.0/bin/linux/amd64/kubectl
+      - chmod +x ./kubectl
+      - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl
+      - export PATH=$PATH:$HOME/bin
+      - echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+      - source ~/.bashrc
+      - echo "kubectl version check"
+      - kubectl version --client
+      - yum install -y jq
+
+  pre_build:
+    commands:
+      - echo "Check CodeBuild IAM identity:"
+      - aws sts get-caller-identity || (echo "Failed to get caller identity - IAM role assumption issue" && exit 1)
+      - echo "Update kubeconfig for EKS cluster (exec auth enabled)"
+      - aws eks --region "$AWS_DEFAULT_REGION" update-kubeconfig --name "$AWS_CLUSTER_NAME" --alias codebuild-cluster
+      - kubectl config use-context codebuild-cluster
+      - echo "Verify cluster access"
+      - echo "==== KUBECONFIG CONTENT START ===="
+      - cat $HOME/.kube/config || echo "kubeconfig not found"
+      - echo "==== KUBECONFIG CONTENT END ==="
+
+  build:
+    commands:
+      - echo "Entered the build phase..."
+      - ls -la
+      - echo "Apply deployment with verbose logging"
+      - kubectl apply -f deployment.yaml --validate=false --v=6 || (echo "kubectl apply failed" && exit 1)
+      - echo "Restart deployment pods"
+      - kubectl rollout restart deployment/banking-based-classification-deployment --namespace=banking-classification || (echo "kubectl rollout restart failed" && exit 1)
