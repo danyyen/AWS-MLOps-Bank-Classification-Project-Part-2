@@ -1,8 +1,90 @@
-# AWS MLOps Project – Banking Classification Model Deployment
+# AWS MLOps Project – Banking Classification Model Deployment Part 2
 
 This project shows how to deploy a Flask-based ML classification model on **Amazon EKS** using a fully automated **AWS MLOps pipeline**.  
 The setup includes Docker containerization, CI/CD with AWS CodePipeline, and Infrastructure as Code using Terraform.
 
+---
+## Tree Structure
+```
+C:.
+│   GitHub Commands.txt
+│   Kubernetes_commands.txt
+│   Readme.md
+│
+├───banking-classification
+│   │   .dockerignore
+│   │   .gitignore
+│   │   buildspec.yaml
+│   │   Dockerfile
+│   │
+│   └───FlaskApplication
+│       │   requirements.txt
+│       │
+│       ├───input
+│       │       Data1.csv
+│       │       Data2.csv
+│       │
+│       ├───lib
+│       │       Digital_transformation_in_Banking_sector.ipynb
+│       │
+│       ├───output
+│       │       finalized_model.sav
+│       │
+│       └───src
+│           │   .env
+│           │   .env.dev
+│           │   .env.prod
+│           │   .flaskenv
+│           │   app.py
+│           │   Engine.py
+│           │   gunicorn.sh
+│           │   logging_module.py
+│           │   predictor.py
+│           │   requirements.txt
+│           │
+│           ├───logs
+│           │       debug.log
+│           │       error.log
+│           │
+│           ├───ML_Pipeline
+│           │   │   grid_model.py
+│           │   │   model_evaluation.py
+│           │   │   train_model.py
+│           │   │   utils.py
+│           │   │
+│           │   └───__pycache__
+│           │           utils.cpython-38.pyc
+│           │
+│           └───__pycache__
+│                   logging_module.cpython-38.pyc
+│                   predictor.cpython-38.pyc
+│
+├───banking-classification-eks
+│       alb-svc.yaml
+│       aws-auth.yaml
+│       buildspec.yaml
+│       deployment.yaml
+│       env
+│       iam_policy.json
+│       ingress.yaml
+│       kubectl
+│       kubernetes-dashboard-admin.yaml
+│       namespace.yaml
+│       service.yaml
+│
+├───results
+└───Terraform
+    │   Data1.csv
+    │   Data2.csv
+    │   Instructions.md
+    │   main.tf
+    │   providers.tf
+    │   secrets.tfvars
+    │   Terraform_Commands.txt
+    │
+    └───.aws
+        └───creds
+                creds
 
 ---
 
@@ -14,6 +96,7 @@ The setup includes Docker containerization, CI/CD with AWS CodePipeline, and Inf
 - **Storage:** Amazon S3 + ECR  
 - **IaC:** Terraform  
 
+```
 ---
 
 ## Repositories
