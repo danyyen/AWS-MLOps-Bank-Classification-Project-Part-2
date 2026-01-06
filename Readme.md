@@ -2,6 +2,7 @@
 
 This project shows how to deploy a Flask-based ML classification model on **Amazon EKS** using a fully automated **AWS MLOps pipeline**.  
 The setup includes Docker containerization, CI/CD with AWS CodePipeline, and Infrastructure as Code using Terraform.
+See link to part 1 https://github.com/danyyen/ML-Classification-Project-for-Bank-s-Digital-Transformation-Part-1.git
 
 ## Aim
 Build and deploy a machine learning model to perform focused digital marketing by predicting the potential customers who will convert from liability customers to asset customers.
