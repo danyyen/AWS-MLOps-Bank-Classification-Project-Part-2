@@ -3,6 +3,9 @@
 This project shows how to deploy a Flask-based ML classification model on **Amazon EKS** using a fully automated **AWS MLOps pipeline**.  
 The setup includes Docker containerization, CI/CD with AWS CodePipeline, and Infrastructure as Code using Terraform.
 
+## Aim
+Build and deploy a machine learning model to perform focused digital marketing by predicting the potential customers who will convert from liability customers to asset customers.
+
 ---
 ## Tree Structure
 ```
@@ -85,7 +88,7 @@ C:.
     └───.aws
         └───creds
                 creds
-
+```
 ---
 
 ## Key Components
@@ -96,13 +99,13 @@ C:.
 - **Storage:** Amazon S3 + ECR  
 - **IaC:** Terraform  
 
-```
+
 ---
 
 ## Repositories
 There are two GitHub repositories in this project:
-1. **banking** → Contains Flask ML code and Dockerfile  
-2. **banking_eks** → Contains Kubernetes YAMLs (Deployment, Service, Ingress)
+* banking** → Contains Flask ML code and Dockerfile  
+* banking_eks** → Contains Kubernetes YAMLs (Deployment, Service, Ingress)
 
 Each repo has its own workflow and CodePipeline setup.
 
